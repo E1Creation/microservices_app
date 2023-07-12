@@ -2,8 +2,9 @@ package com.indivara.paymentservice.controller;
 
 
 import com.indivara.paymentservice.entity.Payment;
-import com.indivara.paymentservice.response.ResponseMessage;
+import com.indivara.paymentservice.dto.response.ResponseMessage;
 import com.indivara.paymentservice.service.PaymentService;
+import com.indivara.userrestclient.dto.response.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class PaymentController {
     @GetMapping("/{id}")
     public ResponseEntity<Payment> findById(@PathVariable Long id){
         return new ResponseEntity<>(paymentService.findbyId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable Long id){
+        return  new ResponseEntity<>(paymentService.findUserById(id), HttpStatus.OK);
     }
 
     @PostMapping

@@ -18,6 +18,9 @@
 		<module>userservices</module>
 		<module>paymentservices</module>
 		<module>productservices</module>
+		<module>user-rest-client</module>
+		<module>product-rest-client</module>
+		<module>api-gateway</module>
 	</modules>
 	<properties>
 		<java.version>1.8</java.version>

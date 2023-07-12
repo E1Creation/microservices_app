@@ -12,6 +12,8 @@
 	<description>paymentservices</description>
 	<properties>
 		<java.version>8</java.version>
+		<user-rest-client.version>0.0.2-SNAPSHOT</user-rest-client.version>
+		<product-rest-client.version>0.0.2-SNAPSHOT</product-rest-client.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -44,6 +46,29 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>retrofit</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-gson</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.indivara</groupId>
+			<artifactId>product-rest-client</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.indivara</groupId>
+			<artifactId>user-rest-client</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

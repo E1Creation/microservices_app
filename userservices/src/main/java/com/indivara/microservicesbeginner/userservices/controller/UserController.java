@@ -1,6 +1,8 @@
 package com.indivara.microservicesbeginner.userservices.controller;
 
 
+import com.indivara.microservicesbeginner.userservices.dto.request.RegisterUser;
+import com.indivara.microservicesbeginner.userservices.dto.response.AuthenticationResponse;
 import com.indivara.microservicesbeginner.userservices.dto.response.ResponseMessage;
 import com.indivara.microservicesbeginner.userservices.entity.User;
 import com.indivara.microservicesbeginner.userservices.service.UserService;
@@ -29,14 +31,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user){
+    public ResponseEntity<AuthenticationResponse> create(@RequestBody RegisterUser user){
         return new ResponseEntity<>(userService.create(user),HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
-        return new ResponseEntity<>(userService.update(id, user), HttpStatus.CREATED);
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseMessage> delete(@PathVariable Long id){
