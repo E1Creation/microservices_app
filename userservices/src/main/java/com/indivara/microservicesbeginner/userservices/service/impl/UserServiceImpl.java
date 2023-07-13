@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+
     public ResponseMessage deleteById(Long id){
         findbyId(id);
         userRepository.deleteById(id);

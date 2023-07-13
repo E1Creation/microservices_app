@@ -29,14 +29,14 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.findbyId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable Long id){
-        return  new ResponseEntity<>(paymentService.findUserById(id), HttpStatus.OK);
-    }
+//    @GetMapping("/user/{id}")
+//    public ResponseEntity<User> findUserById(@PathVariable Long id){
+//        return  new ResponseEntity<>(paymentService.findUserById(id), HttpStatus.OK);
+//    }
 
     @PostMapping
-    public ResponseEntity<Payment> create(@RequestBody Payment payment){
-        return new ResponseEntity<>(paymentService.create(payment),HttpStatus.CREATED);
+    public ResponseEntity<Payment> create(@RequestBody Payment payment, @RequestHeader("Authorization") String autHeader){
+        return new ResponseEntity<>(paymentService.create(payment, autHeader),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

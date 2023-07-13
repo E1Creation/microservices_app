@@ -10,7 +10,6 @@ public interface PaymentService {
      List<Payment> findAll();
      Payment findbyId(Long id);
      Payment update(Long id, Payment payment);
-     User findUserById(Long id);
-     Payment create(Payment payment);
+     Payment create(Payment payment, String authHeader);
      ResponseMessage deleteById(Long id);
 }

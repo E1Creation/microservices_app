@@ -11,10 +11,10 @@ public class UserRestClient {
 
     @Autowired
     public UserService userService;
-    public User getDetailUserById(Long id)  {
+    public User getDetailUserById(Long id, String authHeader)  {
         User user = null;
         try{
-            user = userService.getUserById(id).execute().body();
+            user = userService.getUserById(id, authHeader).execute().body();
         }catch (IOException exception){
             System.out.println(exception.getMessage());
         }

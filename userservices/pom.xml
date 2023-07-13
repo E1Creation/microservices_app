@@ -13,9 +13,14 @@
 	<properties>
 		<java.version>8</java.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
-
+		<flyway-core.version>9.17.0</flyway-core.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<artifactId>flyway-core</artifactId>
+			<groupId>org.flywaydb</groupId>
+			<version>${flyway-core.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

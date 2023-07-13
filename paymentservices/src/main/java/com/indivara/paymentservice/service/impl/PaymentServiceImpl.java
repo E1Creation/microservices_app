@@ -38,14 +38,15 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentRepository.save(savePayment);
     }
 
-    public User findUserById(Long id) {
-        return userRestClient.getDetailUserById(id);
-    }
+//    public User findUserById(Long id) {
+//        return userRestClient.getDetailUserById(id);
+//    }
 
-    public Payment create(Payment payment){
+    public Payment create(Payment payment, String authHeader){
         try{
-            User responseUser = userRestClient.getDetailUserById(payment.getUserId());
-            Product responseProduct = productRestClient.getDetailProductById(payment.getProductId());
+            System.out.println("authorization : "+authHeader);
+            User responseUser = userRestClient.getDetailUserById(payment.getUserId(), authHeader);
+            Product responseProduct = productRestClient.getDetailProductById(payment.getProductId(), authHeader);
             if(responseUser == null) throw new NoSuchElementException("User dengan id " + payment.getUserId() + " tidak ditemukkan");
             if(responseProduct == null) throw new NoSuchElementException("Product dengan id " + payment.getProductId() + " tidak ditemukkan");
             payment.setTotal(responseProduct.getPrice() * payment.getAmount());

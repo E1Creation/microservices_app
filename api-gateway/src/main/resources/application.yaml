@@ -19,21 +19,21 @@ spring:
     gateway:
       routes:
         - id: user_crud
-          uri: ${outbound.user.httpClient.baseUrl}/api/v1/user
+          uri: ${outbound.user.httpClient.baseUrl}/api/v1/user/**
           predicates:
-            - Path=/api/v1/user
+            - Path=/api/v1/user/**
           filters:
             -  AuthenticationFilter
         - id: product_crud
-          uri: ${outbound.product.httpClient.baseUrl}/api/v1/product
+          uri: ${outbound.product.httpClient.baseUrl}/api/v1/product/**
           predicates:
-            - Path=/api/v1/product
+            - Path=/api/v1/product/**
           filters:
             - AuthenticationFilter
         - id: payment_crud
-          uri: ${outbound.payment.httpClient.baseUrl}/api/v1/payment
+          uri: ${outbound.payment.httpClient.baseUrl}/api/v1/payment/**
           predicates:
-            - Path=/api/v1/payment
+            - Path=/api/v1/payment/**
           filters:
             - AuthenticationFilter
 

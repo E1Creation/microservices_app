@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8083
 
 db:
   username: postgres
@@ -7,10 +7,10 @@ db:
   name: microservices_app
   url: localhost
   port: 5432
-  schema: user
+  schema: payment
 spring:
   application:
-    name: USER_SERVICE
+    name: PAYMENT_SERVICE
   datasource:
     username: postgres
     password: postgres
@@ -30,11 +30,3 @@ spring:
     password: ${db.password}
     url: jdbc:postgresql://${db.url}:${db.port}/${db.name}?currentSchema=${db.schema}
     schemas: ${db.schema}
-  redis:
-    host: localhost
-    port: 6379
-application:
-  security:
-    jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000
