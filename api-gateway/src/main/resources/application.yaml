@@ -1,0 +1,40 @@
+server:
+  port: 8084
+
+outbound:
+  user:
+    httpClient:
+      baseUrl: http://localhost:8081/
+  product:
+    httpClient:
+      baseUrl: http://localhost:8082/
+  payment:
+    httpClient:
+      baseUrl: http://localhost:8083/
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user_crud
+          uri: ${outbound.user.httpClient.baseUrl}/api/v1/user
+          predicates:
+            - Path=/api/v1/user
+          filters:
+            -  AuthenticationFilter
+        - id: product_crud
+          uri: ${outbound.product.httpClient.baseUrl}/api/v1/product
+          predicates:
+            - Path=/api/v1/product
+          filters:
+            - AuthenticationFilter
+        - id: payment_crud
+          uri: ${outbound.payment.httpClient.baseUrl}/api/v1/payment
+          predicates:
+            - Path=/api/v1/payment
+          filters:
+            - AuthenticationFilter
+
+

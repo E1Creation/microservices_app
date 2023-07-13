@@ -3,15 +3,18 @@ package com.indivara.microservicesbeginner.userservices.service.impl;
 import com.indivara.microservicesbeginner.userservices.config.JwtService;
 import com.indivara.microservicesbeginner.userservices.dto.request.RegisterUser;
 import com.indivara.microservicesbeginner.userservices.dto.response.AuthenticationResponse;
+import com.indivara.microservicesbeginner.userservices.dto.response.AuthorizationResponse;
 import com.indivara.microservicesbeginner.userservices.dto.response.ResponseMessage;
 import com.indivara.microservicesbeginner.userservices.entity.Customer;
 import com.indivara.microservicesbeginner.userservices.entity.User;
 import com.indivara.microservicesbeginner.userservices.enumeration.Role;
+import com.indivara.microservicesbeginner.userservices.error.InvalidAuthHeaderException;
 import com.indivara.microservicesbeginner.userservices.repo.UserRepository;
 import com.indivara.microservicesbeginner.userservices.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +59,19 @@ public class UserServiceImpl implements UserService {
         redisOperations.opsForSet().add(key, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
+                .build();
+    }
+
+    @Override
+    public AuthorizationResponse getUserByToken(String authHeader) {
+        System.out.println("masuk ke getUserByToken");
+        System.out.println("Token : "+authHeader);
+        if(authHeader == null || !authHeader.startsWith("Bearer")) throw new InvalidAuthHeaderException();
+        String token = jwtService.getTokenFromHeader(authHeader);
+        User user = userRepository.findByUsername(jwtService.extractUsername(token)).orElseThrow(()-> new UsernameNotFoundException("User tidak ditemukkan atau token tidak valid"));
+        return AuthorizationResponse.builder()
+                .id(user.getId())
+                .username(user.getUsername())
                 .build();
     }
 

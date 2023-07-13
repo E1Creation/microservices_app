@@ -35,6 +35,9 @@ public class JwtService {
                 .getBody();
     }
 
+    public String getTokenFromHeader(String authHeader){
+        return authHeader.substring(7);
+    }
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
         final Claims claims = extractAllClaim(token);
         return claimsResolver.apply(claims);

@@ -3,6 +3,7 @@ package com.indivara.microservicesbeginner.userservices.controller;
 
 import com.indivara.microservicesbeginner.userservices.dto.request.RegisterUser;
 import com.indivara.microservicesbeginner.userservices.dto.response.AuthenticationResponse;
+import com.indivara.microservicesbeginner.userservices.dto.response.AuthorizationResponse;
 import com.indivara.microservicesbeginner.userservices.dto.response.ResponseMessage;
 import com.indivara.microservicesbeginner.userservices.entity.User;
 import com.indivara.microservicesbeginner.userservices.service.UserService;
@@ -39,5 +40,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseMessage> delete(@PathVariable Long id){
         return new ResponseEntity<>(userService.deleteById(id), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/credential")
+    public ResponseEntity<AuthorizationResponse> getUserByToken(@RequestHeader("Authorization") String token){
+        return new ResponseEntity<>(userService.getUserByToken(token),HttpStatus.OK);
     }
 }
