@@ -47,6 +47,12 @@ public class SecurityConfiguration {
 
                 //Login dan Request public
                 .antMatchers("/api/v1/auth/**").permitAll()
+//                .requestMatchers(request -> {
+//                    System.out.println("remote port : "+ request.getRemotePort());
+//                    System.out.println("server port : "+ request.getServerPort());
+//                    System.out.println("uri : " +request.getRequestURL());
+//                    return  request.getRemoteHost().contains("http://localhost:8082");
+//                }).permitAll()
 
 
                 .anyRequest()

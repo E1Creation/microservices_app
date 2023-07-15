@@ -1,5 +1,6 @@
 package com.indivara.paymentservice.service.impl;
 
+import com.indivara.paymentservice.dto.response.PaymentWithUserAndProduct;
 import com.indivara.paymentservice.dto.response.ResponseMessage;
 import com.indivara.paymentservice.entity.Payment;
 import com.indivara.paymentservice.repo.PaymentRepository;
@@ -9,20 +10,29 @@ import com.indivara.productrestclient.dto.response.Product;
 import com.indivara.userrestclient.UserRestClient;
 import com.indivara.userrestclient.dto.response.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final ProductRestClient productRestClient;
     private final UserRestClient userRestClient;
+//    private final PaymentWithUserAndProductRepository paymentWithUserAndProductRepository;
 
     public List<Payment> findAll(){
         return paymentRepository.findAll();
+    }
+
+    @Override
+    public List<PaymentWithUserAndProduct> findAllPaymentWithUserAndProduct() {
+        log.info("hasil : "+ paymentRepository.findAllPaymentWithUserAndProduct());
+        return paymentRepository.findAllPaymentWithUserAndProduct();
     }
 
     public Payment findbyId(Long id){
@@ -41,6 +51,7 @@ public class PaymentServiceImpl implements PaymentService {
 //    public User findUserById(Long id) {
 //        return userRestClient.getDetailUserById(id);
 //    }
+
 
     public Payment create(Payment payment, String authHeader){
         try{

@@ -1,6 +1,7 @@
 package com.indivara.paymentservice.controller;
 
 
+import com.indivara.paymentservice.dto.response.PaymentWithUserAndProduct;
 import com.indivara.paymentservice.entity.Payment;
 import com.indivara.paymentservice.dto.response.ResponseMessage;
 import com.indivara.paymentservice.service.PaymentService;
@@ -27,6 +28,11 @@ public class PaymentController {
     @GetMapping("/{id}")
     public ResponseEntity<Payment> findById(@PathVariable Long id){
         return new ResponseEntity<>(paymentService.findbyId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/paymentwithuserandproduct")
+    public ResponseEntity<List<PaymentWithUserAndProduct>> findAllPaymentWithUserAndProduct(){
+        return new ResponseEntity<>(paymentService.findAllPaymentWithUserAndProduct(), HttpStatus.OK);
     }
 
 //    @GetMapping("/user/{id}")
