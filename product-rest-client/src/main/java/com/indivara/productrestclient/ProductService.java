@@ -8,5 +8,5 @@ import retrofit2.http.Path;
 
 public interface ProductService {
     @GET("/api/v1/product/{id}")
-    Call<Product> getProductById(@Path("id") Long id, @Header("Authorization") String authHeader);
+    Call<Product> getProductById(@Path("id") Long id);
 }

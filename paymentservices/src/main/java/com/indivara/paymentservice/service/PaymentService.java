@@ -12,6 +12,6 @@ public interface PaymentService {
      List<PaymentWithUserAndProduct> findAllPaymentWithUserAndProduct();
      Payment findbyId(Long id);
      Payment update(Long id, Payment payment);
-     Payment create(Payment payment, String authHeader);
+     Payment create(Payment payment);
      ResponseMessage deleteById(Long id);
 }

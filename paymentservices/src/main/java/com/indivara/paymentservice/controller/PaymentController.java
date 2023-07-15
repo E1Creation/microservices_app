@@ -41,8 +41,8 @@ public class PaymentController {
 //    }
 
     @PostMapping
-    public ResponseEntity<Payment> create(@RequestBody Payment payment, @RequestHeader("Authorization") String autHeader){
-        return new ResponseEntity<>(paymentService.create(payment, autHeader),HttpStatus.CREATED);
+    public ResponseEntity<Payment> create(@RequestBody Payment payment){
+        return new ResponseEntity<>(paymentService.create(payment),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

@@ -3,6 +3,7 @@ package com.indivara.paymentservice.service.impl;
 import com.indivara.paymentservice.dto.response.PaymentWithUserAndProduct;
 import com.indivara.paymentservice.dto.response.ResponseMessage;
 import com.indivara.paymentservice.entity.Payment;
+import com.indivara.paymentservice.filter.HeaderFilter;
 import com.indivara.paymentservice.repo.PaymentRepository;
 import com.indivara.paymentservice.service.PaymentService;
 import com.indivara.productrestclient.ProductRestClient;
@@ -11,6 +12,8 @@ import com.indivara.userrestclient.UserRestClient;
 import com.indivara.userrestclient.dto.response.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final ProductRestClient productRestClient;
     private final UserRestClient userRestClient;
-//    private final PaymentWithUserAndProductRepository paymentWithUserAndProductRepository;
+    private final HeaderFilter headerFilter;
 
     public List<Payment> findAll(){
         return paymentRepository.findAll();
@@ -52,12 +55,11 @@ public class PaymentServiceImpl implements PaymentService {
 //        return userRestClient.getDetailUserById(id);
 //    }
 
-
-    public Payment create(Payment payment, String authHeader){
+    public Payment create(Payment payment){
         try{
-            System.out.println("authorization : "+authHeader);
-            User responseUser = userRestClient.getDetailUserById(payment.getUserId(), authHeader);
-            Product responseProduct = productRestClient.getDetailProductById(payment.getProductId(), authHeader);
+            System.out.println("authorization : "+headerFilter.getAuthHeader());
+            User responseUser = userRestClient.getDetailUserById(payment.getUserId(), headerFilter.getAuthHeader());
+            Product responseProduct = productRestClient.getDetailProductById(payment.getProductId());
             if(responseUser == null) throw new NoSuchElementException("User dengan id " + payment.getUserId() + " tidak ditemukkan");
             if(responseProduct == null) throw new NoSuchElementException("Product dengan id " + payment.getProductId() + " tidak ditemukkan");
             payment.setTotal(responseProduct.getPrice() * payment.getAmount());
