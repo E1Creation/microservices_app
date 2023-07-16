@@ -1,6 +1,7 @@
 package com.indivara.productservices.controller;
 
 
+import com.indivara.loggingrestclient.aop.TraceLog;
 import com.indivara.productservices.entity.Product;
 import com.indivara.productservices.response.ResponseMessage;
 import com.indivara.productservices.service.ProductService;
@@ -18,6 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @TraceLog
     @GetMapping
     public ResponseEntity<List<Product>> findAll(){
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
@@ -28,6 +30,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.findbyId(id), HttpStatus.OK);
     }
 
+    @TraceLog
     @PostMapping
     public ResponseEntity<Product> create(@RequestBody Product product){
         return new ResponseEntity<>(productService.create(product),HttpStatus.CREATED);

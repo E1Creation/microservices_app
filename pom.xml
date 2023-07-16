@@ -21,6 +21,8 @@
 		<module>user-rest-client</module>
 		<module>product-rest-client</module>
 		<module>api-gateway</module>
+		<module>loggingservice</module>
+		<module>logging-rest-client</module>
 	</modules>
 	<properties>
 		<java.version>1.8</java.version>
